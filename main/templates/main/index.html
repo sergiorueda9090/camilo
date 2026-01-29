@@ -21,17 +21,19 @@
 <main class="container my-5">
   <div class="row g-5">
     <div class="col-lg-8 article">
-      <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200" alt="Estado de Derecho">
-      <h2>La erosion del Estado de Derecho en la praxis politica contemporanea</h2>
-      <p class="lead">
-        Cuando el poder se emancipa del control juridico, la democracia se vacia de contenido.
-      </p>
-      <p>
-        El deterioro institucional no se manifiesta de forma abrupta, sino a traves de
-        interpretaciones flexibles del derecho que normalizan la excepcion y debilitan
-        progresivamente el control constitucional.
-      </p>
-      <a href="#" class="btn-editorial mt-3">Leer columna completa</a>
+      {% if articulo_destacado %}
+      {% if articulo_destacado.imagen_destacada %}
+      <img src="{{ articulo_destacado.imagen_destacada.url }}" alt="{{ articulo_destacado.titulo }}">
+      {% endif %}
+      <h2>{{ articulo_destacado.titulo }}</h2>
+      {% if articulo_destacado.subtitulo %}
+      <p class="lead">{{ articulo_destacado.subtitulo }}</p>
+      {% endif %}
+      <p>{{ articulo_destacado.contenido|striptags|truncatewords:50 }}</p>
+      <a href="{% url 'articulo_detalle' articulo_destacado.slug %}" class="btn-editorial mt-3">Leer columna completa</a>
+      {% else %}
+      <p class="text-muted">No hay articulos publicados.</p>
+      {% endif %}
     </div>
 
     <aside class="col-lg-4">
@@ -72,51 +74,38 @@
 </main>
 
 <!-- ARCHIVO EDITORIAL -->
+{% if articulos_archivo %}
 <section class="archive">
   <div class="container">
     <h3 class="mb-5">Archivo Editorial</h3>
     <div class="row g-4">
 
+      {% for articulo in articulos_archivo %}
       <div class="col-md-4">
         <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab" alt="Democracia y populismo">
+          {% if articulo.imagen_destacada %}
+          <img src="{{ articulo.imagen_destacada.url }}" alt="{{ articulo.titulo }}">
+          {% else %}
+          <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=400" alt="{{ articulo.titulo }}">
+          {% endif %}
           <div class="p-4">
-            <div class="archive-meta mb-2">Julio 2024</div>
-            <h5>Democracia y populismo juridico</h5>
+            <div class="archive-meta mb-2">{{ articulo.fecha_publicacion|date:"F Y" }}</div>
+            <h5>{{ articulo.titulo }}</h5>
             <p class="small text-muted">
-              El uso estrategico del derecho como herramienta de legitimacion politica.
+              {% if articulo.subtitulo %}
+              {{ articulo.subtitulo|truncatewords:15 }}
+              {% else %}
+              {{ articulo.contenido|striptags|truncatewords:15 }}
+              {% endif %}
             </p>
+            <a href="{% url 'articulo_detalle' articulo.slug %}" class="btn-editorial btn-sm mt-2">Leer</a>
           </div>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Constitucion y poder">
-          <div class="p-4">
-            <div class="archive-meta mb-2">Marzo 2024</div>
-            <h5>Constitucion y poder ejecutivo</h5>
-            <p class="small text-muted">
-              Los limites formales e informales del presidencialismo contemporaneo.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="Justicia constitucional">
-          <div class="p-4">
-            <div class="archive-meta mb-2">Octubre 2023</div>
-            <h5>Justicia constitucional y opinion publica</h5>
-            <p class="small text-muted">
-              El rol del juez frente a la presion mediatica y politica.
-            </p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
 
     </div>
   </div>
 </section>
+{% endif %}
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import PerfilAutor, CapsulaJuridica
+from .models import PerfilAutor, CapsulaJuridica, Categoria, Articulo
 
 
 @admin.register(PerfilAutor)
@@ -46,7 +46,6 @@ class CapsulaJuridicaAdmin(admin.ModelAdmin):
     contenido_corto.short_description = 'Contenido'
 
     def has_add_permission(self, request):
-        # Solo permite agregar si hay menos de MAX_CAPSULAS
         return CapsulaJuridica.objects.count() < CapsulaJuridica.MAX_CAPSULAS
 
     def changelist_view(self, request, extra_context=None):
@@ -54,3 +53,51 @@ class CapsulaJuridicaAdmin(admin.ModelAdmin):
         count = CapsulaJuridica.objects.count()
         extra_context['subtitle'] = f'{count}/{CapsulaJuridica.MAX_CAPSULAS} capsulas'
         return super().changelist_view(request, extra_context=extra_context)
+
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'slug', 'total_articulos']
+    prepopulated_fields = {'slug': ('nombre',)}
+    search_fields = ['nombre']
+
+    def total_articulos(self, obj):
+        return obj.articulos.count()
+    total_articulos.short_description = 'Articulos'
+
+
+@admin.register(Articulo)
+class ArticuloAdmin(admin.ModelAdmin):
+    list_display = [
+        'titulo', 'categoria', 'estado', 'destacado',
+        'fecha_publicacion', 'vistas'
+    ]
+    list_filter = ['estado', 'categoria', 'destacado', 'fecha_publicacion']
+    list_editable = ['estado', 'destacado']
+    search_fields = ['titulo', 'contenido', 'subtitulo', 'extracto']
+    prepopulated_fields = {'slug': ('titulo',)}
+    date_hierarchy = 'fecha_publicacion'
+    readonly_fields = ['vistas', 'fecha_creacion', 'fecha_actualizacion', 'tiempo_lectura']
+
+    fieldsets = (
+        ('Contenido principal', {
+            'fields': ('titulo', 'slug', 'subtitulo', 'extracto', 'contenido')
+        }),
+        ('Imagen', {
+            'fields': ('imagen_destacada', 'imagen_url', 'pie_imagen')
+        }),
+        ('Clasificacion', {
+            'fields': ('autor', 'categoria')
+        }),
+        ('Publicacion', {
+            'fields': ('estado', 'destacado', 'fecha_publicacion')
+        }),
+        ('SEO', {
+            'fields': ('meta_descripcion', 'meta_keywords', 'og_image'),
+            'classes': ('collapse',)
+        }),
+        ('Estadisticas', {
+            'fields': ('tiempo_lectura', 'vistas', 'fecha_creacion', 'fecha_actualizacion'),
+            'classes': ('collapse',)
+        }),
+    )

@@ -1,18 +1,19 @@
 {% extends 'main/base.html' %}
 
-{% block title %}La erosion del Estado de Derecho en la praxis politica contemporanea | Dr. Camilo Soler Rueda{% endblock %}
+{% block title %}{{ articulo.titulo }} | Dr. Camilo Soler Rueda{% endblock %}
 
 {% block meta_tags %}
 <!-- SEO Meta Tags -->
-<meta name="description" content="Analisis profundo sobre el deterioro institucional y las interpretaciones flexibles del derecho que debilitan el control constitucional.">
-<meta name="keywords" content="Estado de Derecho, Constitucionalismo, Democracia, Control Constitucional, Derecho Politico">
-<meta name="author" content="Dr. Camilo Soler Rueda">
+<meta name="description" content="{{ articulo.subtitulo|default:articulo.contenido|striptags|truncatewords:30 }}">
+<meta name="author" content="{{ articulo.autor.nombre_completo }}">
 
 <!-- Open Graph -->
-<meta property="og:title" content="La erosion del Estado de Derecho en la praxis politica contemporanea">
-<meta property="og:description" content="Cuando el poder se emancipa del control juridico, la democracia se vacia de contenido.">
+<meta property="og:title" content="{{ articulo.titulo }}">
+<meta property="og:description" content="{{ articulo.subtitulo|default:articulo.contenido|striptags|truncatewords:30 }}">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://images.unsplash.com/photo-1505664194779-8beaceb93744">
+{% if articulo.imagen_destacada %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ articulo.imagen_destacada.url }}">
+{% endif %}
 {% endblock %}
 
 {% block extra_css %}
@@ -40,258 +41,6 @@
   font-size:.95rem;
   line-height:1.7;
 }
-
-/* FORMULARIO DE COMENTARIO */
-.comment-form-box{
-  background:#f9f9f8;
-  border:1px solid var(--line);
-  padding:35px;
-  margin-bottom:50px;
-}
-.comment-form-title{
-  font-family:'Playfair Display',serif;
-  color:var(--blue);
-  margin-bottom:25px;
-  font-size:1.2rem;
-}
-.comment-input{
-  border:1px solid #ddd;
-  padding:12px 16px;
-  font-size:.9rem;
-  border-radius:0;
-  transition:.3s;
-}
-.comment-input:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(179,147,89,0.1);
-  outline:none;
-}
-.comment-textarea{
-  border:1px solid #ddd;
-  padding:12px 16px;
-  font-size:.9rem;
-  border-radius:0;
-  resize:vertical;
-  min-height:120px;
-  font-family:'Inter',sans-serif;
-}
-.comment-textarea:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(179,147,89,0.1);
-  outline:none;
-}
-.comment-guidelines{
-  background:#fff;
-  border-left:3px solid var(--gold);
-  padding:10px 15px;
-}
-.btn-comment-submit{
-  background:var(--blue);
-  color:#fff;
-  border:none;
-  padding:12px 30px;
-  font-size:.85rem;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  font-weight:600;
-  transition:.3s;
-  cursor:pointer;
-}
-.btn-comment-submit:hover{
-  background:#2a3557;
-}
-.btn-comment-submit.btn-sm{
-  padding:8px 20px;
-  font-size:.8rem;
-}
-.btn-comment-cancel{
-  background:none;
-  color:var(--muted);
-  border:1px solid #ddd;
-  padding:8px 20px;
-  font-size:.8rem;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  font-weight:600;
-  transition:.3s;
-  cursor:pointer;
-  margin-left:10px;
-}
-.btn-comment-cancel:hover{
-  border-color:var(--muted);
-  background:#f5f5f5;
-}
-
-/* LISTA DE COMENTARIOS */
-.comments-list{
-  margin-bottom:40px;
-}
-.comments-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-  padding-bottom:15px;
-  border-bottom:2px solid var(--line);
-}
-.comments-count{
-  font-family:'Playfair Display',serif;
-  color:var(--blue);
-  margin:0;
-  font-size:1.3rem;
-}
-.comment-filter-select{
-  border:1px solid #ddd;
-  border-radius:0;
-  font-size:.85rem;
-  padding:6px 12px;
-  width:auto;
-}
-
-/* COMENTARIO INDIVIDUAL */
-.comment-item{
-  display:flex;
-  gap:20px;
-  padding:25px 0;
-  border-bottom:1px solid var(--line);
-}
-.comment-avatar{
-  flex-shrink:0;
-}
-.comment-avatar i{
-  font-size:3rem;
-  color:var(--gold);
-}
-.comment-content{
-  flex:1;
-}
-.comment-meta{
-  margin-bottom:12px;
-}
-.comment-author{
-  font-size:1rem;
-  color:var(--blue);
-  display:inline-block;
-  margin-right:10px;
-}
-.comment-position{
-  font-size:.8rem;
-  color:var(--muted);
-  font-style:italic;
-  display:inline-block;
-  margin-right:10px;
-}
-.comment-badge{
-  display:inline-block;
-  background:var(--gold);
-  color:#fff;
-  padding:2px 8px;
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin:0 10px;
-  font-weight:600;
-}
-.comment-date{
-  font-size:.75rem;
-  color:var(--muted);
-}
-.comment-text{
-  color:#2a2a2a;
-  line-height:1.7;
-  margin-bottom:15px;
-  font-size:.95rem;
-}
-.comment-actions{
-  display:flex;
-  gap:20px;
-}
-.comment-action-btn{
-  background:none;
-  border:none;
-  color:var(--muted);
-  font-size:.85rem;
-  cursor:pointer;
-  padding:0;
-  transition:.3s;
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-.comment-action-btn:hover{
-  color:var(--gold);
-}
-
-/* RESPUESTA A COMENTARIO */
-.comment-reply{
-  display:flex;
-  gap:15px;
-  margin-top:20px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  background:#f9f9f8;
-  padding:20px;
-}
-.comment-reply .comment-avatar i{
-  font-size:2.5rem;
-}
-.reply-form{
-  margin-top:20px;
-  padding:20px;
-  background:#f9f9f8;
-  border:1px solid var(--line);
-}
-
-/* BOTON CARGAR MAS */
-.btn-load-more{
-  background:none;
-  border:1px solid var(--blue);
-  color:var(--blue);
-  padding:12px 30px;
-  font-size:.85rem;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-}
-.btn-load-more:hover{
-  background:var(--blue);
-  color:#fff;
-}
-
-/* REGLAS DEL DEBATE */
-.debate-rules{
-  background:#f9f9f8;
-  border-left:4px solid var(--gold);
-  padding:25px 30px;
-  margin-top:40px;
-}
-.debate-rules h6{
-  font-family:'Playfair Display',serif;
-  color:var(--blue);
-  font-size:1rem;
-  margin-bottom:15px;
-}
-.debate-rules ul{
-  margin:0;
-  padding-left:20px;
-}
-.debate-rules li{
-  color:var(--muted);
-  font-size:.9rem;
-  margin-bottom:8px;
-  line-height:1.6;
-}
-
-/* RESPONSIVE COMENTARIOS */
-@media (max-width: 768px) {
-  .comment-item{flex-direction:column; gap:15px;}
-  .comment-avatar i{font-size:2.5rem;}
-  .comments-header{flex-direction:column; align-items:flex-start; gap:15px;}
-  .comment-form-box{padding:20px;}
-  .comment-reply{flex-direction:column;}
-}
 {% endblock %}
 
 {% block header %}
@@ -302,9 +51,9 @@
       <a href="{% url 'home' %}" class="header-logo">Camilo Soler Rueda</a>
       <nav class="nav-links d-none d-md-block">
         <a href="{% url 'home' %}">Inicio</a>
-        <a href="#analisis">Analisis</a>
-        <a href="#jurisprudencia">Jurisprudencia</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#">Analisis</a>
+        <a href="#">Jurisprudencia</a>
+        <a href="#">Contacto</a>
       </nav>
     </div>
   </div>
@@ -317,8 +66,10 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-editorial">
       <li class="breadcrumb-item"><a href="{% url 'home' %}">Inicio</a></li>
-      <li class="breadcrumb-item"><a href="#analisis">Analisis</a></li>
-      <li class="breadcrumb-item active" aria-current="page">La erosion del Estado de Derecho</li>
+      {% if articulo.categoria %}
+      <li class="breadcrumb-item"><a href="#">{{ articulo.categoria.nombre }}</a></li>
+      {% endif %}
+      <li class="breadcrumb-item active" aria-current="page">{{ articulo.titulo|truncatewords:5 }}</li>
     </ol>
   </nav>
 </div>
@@ -328,29 +79,29 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <span class="article-category">Analisis Constitucional</span>
-        <h1 class="article-title">
-          La erosion del Estado de Derecho en la praxis politica contemporanea
-        </h1>
-        <p class="article-lead">
-          Cuando el poder se emancipa del control juridico, la democracia se vacia de contenido.
-        </p>
+        {% if articulo.categoria %}
+        <span class="article-category">{{ articulo.categoria.nombre }}</span>
+        {% endif %}
+        <h1 class="article-title">{{ articulo.titulo }}</h1>
+        {% if articulo.subtitulo %}
+        <p class="article-lead">{{ articulo.subtitulo }}</p>
+        {% endif %}
         <div class="article-meta">
           <div class="meta-item">
             <i class="bi bi-person-circle"></i>
-            <span>Dr. Camilo Soler Rueda</span>
+            <span>{{ articulo.autor.nombre_completo }}</span>
           </div>
           <div class="meta-item">
             <i class="bi bi-calendar3"></i>
-            <span>15 de Enero, 2026</span>
+            <span>{{ articulo.fecha_publicacion|date:"d \d\e F, Y" }}</span>
           </div>
           <div class="meta-item">
             <i class="bi bi-clock"></i>
-            <span>12 min de lectura</span>
+            <span>{{ articulo.tiempo_lectura }} min de lectura</span>
           </div>
           <div class="meta-item">
             <i class="bi bi-eye"></i>
-            <span>2,847 lecturas</span>
+            <span>{{ articulo.vistas|default:0 }} lecturas</span>
           </div>
         </div>
       </div>
@@ -365,140 +116,37 @@
     <!-- ARTICULO -->
     <div class="col-lg-8">
 
-      <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&h=500"
-           alt="Imagen representativa del Estado de Derecho"
+      {% if articulo.imagen_destacada %}
+      <img src="{{ articulo.imagen_destacada.url }}"
+           alt="{{ articulo.titulo }}"
            class="featured-image"
            loading="lazy">
+      {% endif %}
 
       <article class="article-content">
-
-        <p>
-          El deterioro institucional no se manifiesta de forma abrupta. No es el resultado de
-          un golpe de Estado clasico ni de una ruptura constitucional evidente. Por el contrario,
-          se trata de un proceso gradual, casi imperceptible, que opera a traves de interpretaciones
-          cada vez mas flexibles del derecho, normalizando la excepcion y debilitando progresivamente
-          el control constitucional.
-        </p>
-
-        <p>
-          Esta forma de erosion democratica -que algunos autores han denominado "retroceso democratico"
-          o "autoritarismo competitivo"- se caracteriza por mantener la fachada institucional mientras
-          se vacian sus contenidos sustanciales. Las elecciones continuan celebrandose, los tribunales
-          siguen operando, el Congreso legisla, pero los pesos y contrapesos que garantizan el equilibrio
-          del poder se van debilitando sistematicamente.
-        </p>
-
-        <h2>El fenomeno de la captura institucional</h2>
-
-        <p>
-          La captura institucional representa una de las manifestaciones mas sofisticadas del deterioro
-          del Estado de Derecho. A diferencia de la intervencion directa en las instituciones, la captura
-          opera mediante el nombramiento estrategico de funcionarios leales, la modificacion gradual de
-          procedimientos y la reinterpretacion conveniente de normas constitucionales.
-        </p>
-
-        <p>
-          Este proceso adquiere particular relevancia cuando se dirige hacia instituciones de control
-          como las Cortes Constitucionales, las Contralorias, las Fiscalias y los organismos electorales.
-          Cuando estas instancias dejan de ejercer su funcion de contrapeso efectivo, el sistema
-          constitucional pierde su capacidad de autodefensa.
-        </p>
-
-        <div class="pullquote">
-          "El poder sin limites no es democracia, es tirania con elecciones."
-          <div class="pullquote-author">- Reflexion sobre el control del poder</div>
-        </div>
-
-        <h2>La normalizacion de la excepcion</h2>
-
-        <p>
-          Uno de los rasgos mas preocupantes del deterioro institucional contemporaneo es la conversion
-          de lo excepcional en ordinario. Los estados de excepcion, pensados originalmente como medidas
-          temporales y extraordinarias ante situaciones de grave crisis, se han convertido en herramientas
-          de gobierno habitual en diversos contextos.
-        </p>
-
-        <p>
-          Esta normalizacion de la excepcion genera un doble efecto pernicioso. Por un lado, acostumbra
-          a la ciudadania a vivir bajo regimenes de excepcion, reduciendo su umbral de alerta democratica.
-          Por otro, debilita las salvaguardas constitucionales disenadas precisamente para limitar el
-          ejercicio del poder en circunstancias extraordinarias.
-        </p>
-
-        <h3>El papel de la retorica securitaria</h3>
-
-        <p>
-          La justificacion de estas practicas suele apelar a narrativas de seguridad nacional, crisis
-          economica o emergencia sanitaria. Sin embargo, el problema no radica en la existencia de crisis
-          reales -que efectivamente existen- sino en la instrumentalizacion de estas crisis para expandir
-          y perpetuar poderes excepcionales que terminan transformando la arquitectura constitucional.
-        </p>
-
-        <h2>El debilitamiento del control judicial</h2>
-
-        <p>
-          La justicia constitucional representa, en teoria, el ultimo bastion de defensa del Estado de
-          Derecho. Sin embargo, esta funcion contramayoritaria -disenada para proteger los derechos
-          fundamentales y los limites constitucionales incluso contra las mayorias- enfrenta crecientes
-          presiones en el contexto actual.
-        </p>
-
-        <p>
-          Estas presiones adoptan multiples formas: desde ataques publicos a la legitimidad de los
-          tribunales, pasando por intentos de reforma que buscan subordinar la justicia al poder politico,
-          hasta estrategias mas sutiles de desgaste institucional mediante la saturacion de trabajo y
-          la reduccion de recursos.
-        </p>
-
-        <div class="pullquote">
-          "Una Constitucion que no se aplica es apenas un museo de buenas intenciones."
-          <div class="pullquote-author">- Sobre la eficacia del derecho constitucional</div>
-        </div>
-
-        <h2>Reflexiones finales</h2>
-
-        <p>
-          La erosion del Estado de Derecho en la praxis politica contemporanea constituye uno de los
-          desafios mas serios para la democracia del siglo XXI. A diferencia de las amenazas autoritarias
-          del pasado, esta nueva forma de deterioro opera dentro del sistema, utilizando las herramientas
-          del derecho para vaciar al derecho mismo de contenido.
-        </p>
-
-        <p>
-          La respuesta a este desafio no puede ser simplemente defensiva. Requiere una renovacion
-          del compromiso con los valores constitucionales, el fortalecimiento de las instituciones de
-          control y la construccion de una cultura democratica mas robusta y resiliente.
-        </p>
-
-        <p>
-          En ultima instancia, el Estado de Derecho no es solo un conjunto de normas e instituciones.
-          Es un proyecto politico que debe ser constantemente defendido, actualizado y reinventado por
-          cada generacion. Su supervivencia depende de nuestra capacidad colectiva para reconocer sus
-          vulnerabilidades y actuar antes de que el deterioro se vuelva irreversible.
-        </p>
-
+        {{ articulo.contenido|safe }}
       </article>
 
       <!-- COMPARTIR -->
       <div class="share-section">
         <div class="share-title">Compartir este analisis</div>
         <div class="share-buttons">
-          <a href="https://twitter.com/intent/tweet?url=&text=La%20erosion%20del%20Estado%20de%20Derecho"
+          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ articulo.titulo|urlencode }}"
              target="_blank"
              aria-label="Compartir en Twitter">
             <i class="bi bi-twitter-x"></i>
           </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u="
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
              target="_blank"
              aria-label="Compartir en Facebook">
             <i class="bi bi-facebook"></i>
           </a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url="
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}"
              target="_blank"
              aria-label="Compartir en LinkedIn">
             <i class="bi bi-linkedin"></i>
           </a>
-          <a href="mailto:?subject=La%20erosion%20del%20Estado%20de%20Derecho&body=Te%20recomiendo%20este%20articulo"
+          <a href="mailto:?subject={{ articulo.titulo|urlencode }}&body=Te%20recomiendo%20este%20articulo:%20{{ request.build_absolute_uri }}"
              aria-label="Compartir por correo">
             <i class="bi bi-envelope"></i>
           </a>
@@ -511,16 +159,17 @@
       </div>
 
       <!-- AUTOR BOX -->
+      {% if perfil %}
       <div class="author-box-article">
+        {% if perfil.foto %}
+        <img src="{{ perfil.foto.url }}" alt="{{ perfil.nombre_completo }}">
+        {% else %}
         <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300"
-             alt="Dr. Camilo Soler Rueda">
+             alt="{{ perfil.nombre_completo }}">
+        {% endif %}
         <div class="author-info">
-          <h5>Dr. Camilo Soler Rueda</h5>
-          <p>
-            Abogado constitucionalista, periodista y analista politico. Doctor en Derecho
-            por la Universidad Nacional. Especialista en control del poder, democracia y
-            Estado de Derecho. Columnista habitual en medios nacionales e internacionales.
-          </p>
+          <h5>{{ perfil.nombre_completo }}</h5>
+          <p>{{ perfil.descripcion }}</p>
           <div class="author-social">
             <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
             <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -528,222 +177,41 @@
           </div>
         </div>
       </div>
+      {% endif %}
 
       <!-- NAVEGACION ARTICULOS -->
+      {% if articulo_anterior or articulo_siguiente %}
       <div class="article-navigation">
         <div class="row g-3">
           <div class="col-md-6">
-            <a href="#" class="nav-article text-decoration-none">
+            {% if articulo_anterior %}
+            <a href="{% url 'articulo_detalle' articulo_anterior.slug %}" class="nav-article text-decoration-none">
               <div>
                 <i class="bi bi-arrow-left" style="font-size:1.5rem; color:var(--gold);"></i>
               </div>
               <div>
                 <div class="nav-label">Articulo Anterior</div>
-                <div class="nav-title">Democracia y populismo juridico</div>
+                <div class="nav-title">{{ articulo_anterior.titulo|truncatewords:6 }}</div>
               </div>
             </a>
+            {% endif %}
           </div>
           <div class="col-md-6">
-            <a href="#" class="nav-article text-decoration-none justify-content-end">
+            {% if articulo_siguiente %}
+            <a href="{% url 'articulo_detalle' articulo_siguiente.slug %}" class="nav-article text-decoration-none justify-content-end">
               <div class="text-end">
                 <div class="nav-label">Siguiente Articulo</div>
-                <div class="nav-title">Constitucion y poder ejecutivo</div>
+                <div class="nav-title">{{ articulo_siguiente.titulo|truncatewords:6 }}</div>
               </div>
               <div>
                 <i class="bi bi-arrow-right" style="font-size:1.5rem; color:var(--gold);"></i>
               </div>
             </a>
+            {% endif %}
           </div>
         </div>
       </div>
-
-      <!-- SECCION DE DEBATE Y COMENTARIOS -->
-      <div class="debate-section" id="debate">
-        <div class="debate-header">
-          <h3 class="debate-title">Debate Academico</h3>
-          <p class="debate-subtitle">
-            Comparte tu analisis juridico y participa en el debate sobre este articulo.
-            Fomentamos un intercambio respetuoso y fundamentado de ideas.
-          </p>
-        </div>
-
-        <!-- FORMULARIO DE COMENTARIO -->
-        <div class="comment-form-box">
-          <h5 class="comment-form-title">
-            <i class="bi bi-chat-left-text me-2"></i>
-            Comparte tu opinion
-          </h5>
-          <form id="commentForm">
-            <div class="row g-3 mb-3">
-              <div class="col-md-6">
-                <input
-                  type="text"
-                  class="form-control comment-input"
-                  placeholder="Nombre completo *"
-                  required
-                  id="commentName"
-                >
-              </div>
-              <div class="col-md-6">
-                <input
-                  type="email"
-                  class="form-control comment-input"
-                  placeholder="Correo electronico *"
-                  required
-                  id="commentEmail"
-                >
-              </div>
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control comment-input"
-                placeholder="Cargo / Institucion (opcional)"
-                id="commentPosition"
-              >
-            </div>
-            <div class="mb-3">
-              <textarea
-                class="form-control comment-textarea"
-                rows="5"
-                placeholder="Escribe tu comentario, analisis o pregunta... *"
-                required
-                id="commentText"
-              ></textarea>
-              <div class="comment-guidelines mt-2">
-                <small class="text-muted">
-                  <i class="bi bi-info-circle me-1"></i>
-                  Por favor, manten un tono profesional y fundamenta tus argumentos.
-                  Los comentarios son moderados antes de publicarse.
-                </small>
-              </div>
-            </div>
-            <button type="submit" class="btn-comment-submit">
-              <i class="bi bi-send me-2"></i>
-              Publicar Comentario
-            </button>
-          </form>
-        </div>
-
-        <!-- COMENTARIOS EXISTENTES -->
-        <div class="comments-list">
-          <div class="comments-header">
-            <h5 class="comments-count">
-              <i class="bi bi-chat-dots me-2"></i>
-              12 comentarios
-            </h5>
-            <div class="comments-filter">
-              <select class="form-select form-select-sm comment-filter-select">
-                <option>Mas recientes</option>
-                <option>Mas antiguos</option>
-                <option>Mas relevantes</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- COMENTARIO 1 -->
-          <div class="comment-item">
-            <div class="comment-avatar">
-              <i class="bi bi-person-circle"></i>
-            </div>
-            <div class="comment-content">
-              <div class="comment-meta">
-                <strong class="comment-author">Dra. Maria Fernanda Gomez</strong>
-                <span class="comment-position">Profesora de Derecho Constitucional, Universidad Nacional</span>
-                <span class="comment-date">Hace 2 dias</span>
-              </div>
-              <div class="comment-text">
-                Excelente analisis sobre la erosion institucional. Me parece particularmente relevante
-                el punto sobre la normalizacion de la excepcion. En nuestra investigacion sobre estados
-                de emergencia en America Latina, hemos documentado como estos mecanismos excepcionales
-                se han convertido en herramientas ordinarias de gobierno.
-              </div>
-              <div class="comment-actions">
-                <button class="comment-action-btn" onclick="toggleReply(1)">
-                  <i class="bi bi-reply"></i> Responder
-                </button>
-                <button class="comment-action-btn">
-                  <i class="bi bi-hand-thumbs-up"></i> Util (8)
-                </button>
-              </div>
-
-              <!-- FORMULARIO DE RESPUESTA -->
-              <div class="reply-form" id="reply-form-1" style="display:none;">
-                <textarea
-                  class="form-control comment-textarea"
-                  rows="3"
-                  placeholder="Escribe tu respuesta..."
-                ></textarea>
-                <div class="mt-2">
-                  <button class="btn-comment-submit btn-sm">Publicar respuesta</button>
-                  <button class="btn-comment-cancel btn-sm" onclick="toggleReply(1)">Cancelar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- COMENTARIO 2 -->
-          <div class="comment-item">
-            <div class="comment-avatar">
-              <i class="bi bi-person-circle"></i>
-            </div>
-            <div class="comment-content">
-              <div class="comment-meta">
-                <strong class="comment-author">Dr. Carlos Mendoza</strong>
-                <span class="comment-position">Magistrado (r), Corte Constitucional</span>
-                <span class="comment-date">Hace 3 dias</span>
-              </div>
-              <div class="comment-text">
-                El articulo plantea una reflexion necesaria. Desde mi experiencia en la Corte,
-                puedo confirmar que las presiones sobre el control judicial constitucional son
-                cada vez mas sofisticadas. Ya no se trata solo de ataques frontales, sino de
-                estrategias graduales que buscan limitar la independencia judicial.
-              </div>
-              <div class="comment-actions">
-                <button class="comment-action-btn" onclick="toggleReply(2)">
-                  <i class="bi bi-reply"></i> Responder
-                </button>
-                <button class="comment-action-btn">
-                  <i class="bi bi-hand-thumbs-up"></i> Util (15)
-                </button>
-              </div>
-
-              <!-- FORMULARIO DE RESPUESTA -->
-              <div class="reply-form" id="reply-form-2" style="display:none;">
-                <textarea
-                  class="form-control comment-textarea"
-                  rows="3"
-                  placeholder="Escribe tu respuesta..."
-                ></textarea>
-                <div class="mt-2">
-                  <button class="btn-comment-submit btn-sm">Publicar respuesta</button>
-                  <button class="btn-comment-cancel btn-sm" onclick="toggleReply(2)">Cancelar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BOTON CARGAR MAS -->
-          <div class="text-center mt-4">
-            <button class="btn-load-more">
-              <i class="bi bi-arrow-down-circle me-2"></i>
-              Cargar mas comentarios (10 restantes)
-            </button>
-          </div>
-        </div>
-
-        <!-- REGLAS DEL DEBATE -->
-        <div class="debate-rules">
-          <h6><i class="bi bi-shield-check me-2"></i>Normas de Participacion</h6>
-          <ul>
-            <li>Manten un tono respetuoso y profesional</li>
-            <li>Fundamenta tus argumentos con referencias cuando sea posible</li>
-            <li>Evita ataques personales o descalificaciones</li>
-            <li>Los comentarios pueden ser moderados para mantener la calidad del debate</li>
-            <li>Se valorara especialmente el aporte constructivo al analisis juridico</li>
-          </ul>
-        </div>
-      </div>
+      {% endif %}
 
     </div>
 
@@ -754,79 +222,29 @@
       <div class="sidebar-box">
         <h5 class="sidebar-title">Mas Leidos</h5>
 
+        {% for art in relacionados %}
         <div class="sidebar-item">
-          <div class="sidebar-date">Enero 2026</div>
-          <h6><a href="#">El control constitucional en tiempos de crisis</a></h6>
+          <div class="sidebar-date">{{ art.fecha_publicacion|date:"F Y" }}</div>
+          <h6><a href="{% url 'articulo_detalle' art.slug %}">{{ art.titulo }}</a></h6>
         </div>
-
-        <div class="sidebar-item">
-          <div class="sidebar-date">Diciembre 2025</div>
-          <h6><a href="#">Separacion de poderes: teoria vs. practica</a></h6>
-        </div>
-
-        <div class="sidebar-item">
-          <div class="sidebar-date">Noviembre 2025</div>
-          <h6><a href="#">La independencia judicial bajo presion</a></h6>
-        </div>
-
-        <div class="sidebar-item">
-          <div class="sidebar-date">Octubre 2025</div>
-          <h6><a href="#">Democracia deliberativa en la era digital</a></h6>
-        </div>
+        {% empty %}
+        <p class="small text-muted">No hay articulos relacionados.</p>
+        {% endfor %}
       </div>
 
-      <!-- NEWSLETTER -->
-      <div class="newsletter-inline">
-        <h4>Suscribete al Analisis</h4>
-        <p>Recibe reflexiones semanales sobre constitucionalismo y politica.</p>
-        <form class="newsletter-form">
-          <input type="email"
-                 placeholder="Tu correo profesional"
-                 required
-                 class="form-control">
-          <button type="submit" class="btn-newsletter">Suscribirme</button>
-        </form>
-        <p class="mt-3 small" style="color:rgba(255,255,255,0.7);">
-          Sin spam. Cancela cuando quieras.
-        </p>
-      </div>
+      <!-- CAPSULAS JURIDICAS -->
+      {% if capsulas %}
+      <div class="capsules-box">
+        <h6 class="capsules-title">Capsulas Juridicas</h6>
 
-      <!-- CATEGORIAS -->
-      <div class="sidebar-box">
-        <h5 class="sidebar-title">Categorias</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2">
-            <a href="#" class="d-flex justify-content-between">
-              <span>Analisis Constitucional</span>
-              <span class="text-muted">(24)</span>
-            </a>
-          </li>
-          <li class="mb-2">
-            <a href="#" class="d-flex justify-content-between">
-              <span>Opinion Politica</span>
-              <span class="text-muted">(18)</span>
-            </a>
-          </li>
-          <li class="mb-2">
-            <a href="#" class="d-flex justify-content-between">
-              <span>Derecho Comparado</span>
-              <span class="text-muted">(15)</span>
-            </a>
-          </li>
-          <li class="mb-2">
-            <a href="#" class="d-flex justify-content-between">
-              <span>Jurisprudencia</span>
-              <span class="text-muted">(12)</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="d-flex justify-content-between">
-              <span>Democracia</span>
-              <span class="text-muted">(21)</span>
-            </a>
-          </li>
-        </ul>
+        {% for capsula in capsulas %}
+        <div class="capsule-item">
+          <h6>{{ capsula.titulo }}</h6>
+          <p>{{ capsula.contenido|truncatewords:20 }}</p>
+        </div>
+        {% endfor %}
       </div>
+      {% endif %}
 
     </aside>
 
@@ -834,74 +252,46 @@
 </main>
 
 <!-- ARTICULOS RELACIONADOS -->
+{% if relacionados %}
 <section class="related-articles">
   <div class="container">
     <h3 class="mb-5 text-center">Articulos Relacionados</h3>
     <div class="row g-4">
 
+      {% for art in relacionados %}
       <div class="col-md-4">
         <div class="related-card">
-          <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&w=400"
-               alt="Democracia y populismo juridico"
+          {% if art.imagen_destacada %}
+          <img src="{{ art.imagen_destacada.url }}"
+               alt="{{ art.titulo }}"
                loading="lazy">
+          {% else %}
+          <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=400"
+               alt="{{ art.titulo }}"
+               loading="lazy">
+          {% endif %}
           <div class="p-4">
-            <div class="related-meta mb-2">Analisis Politico</div>
-            <h5><a href="#" class="text-decoration-none">Democracia y populismo juridico</a></h5>
+            {% if art.categoria %}
+            <div class="related-meta mb-2">{{ art.categoria.nombre }}</div>
+            {% endif %}
+            <h5><a href="{% url 'articulo_detalle' art.slug %}" class="text-decoration-none">{{ art.titulo }}</a></h5>
             <p class="small text-muted">
-              El uso estrategico del derecho como herramienta de legitimacion politica.
+              {{ art.subtitulo|default:art.contenido|striptags|truncatewords:15 }}
             </p>
             <div class="d-flex align-items-center gap-2 small text-muted mt-3">
               <i class="bi bi-calendar3"></i>
-              <span>Julio 2024</span>
-              <span class="ms-auto">8 min</span>
+              <span>{{ art.fecha_publicacion|date:"F Y" }}</span>
+              <span class="ms-auto">{{ art.tiempo_lectura }} min</span>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="related-card">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400"
-               alt="Constitucion y poder ejecutivo"
-               loading="lazy">
-          <div class="p-4">
-            <div class="related-meta mb-2">Derecho Constitucional</div>
-            <h5><a href="#" class="text-decoration-none">Constitucion y poder ejecutivo</a></h5>
-            <p class="small text-muted">
-              Los limites formales e informales del presidencialismo contemporaneo.
-            </p>
-            <div class="d-flex align-items-center gap-2 small text-muted mt-3">
-              <i class="bi bi-calendar3"></i>
-              <span>Marzo 2024</span>
-              <span class="ms-auto">10 min</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="related-card">
-          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=400"
-               alt="Justicia constitucional"
-               loading="lazy">
-          <div class="p-4">
-            <div class="related-meta mb-2">Analisis Judicial</div>
-            <h5><a href="#" class="text-decoration-none">Justicia constitucional y opinion publica</a></h5>
-            <p class="small text-muted">
-              El rol del juez frente a la presion mediatica y politica.
-            </p>
-            <div class="d-flex align-items-center gap-2 small text-muted mt-3">
-              <i class="bi bi-calendar3"></i>
-              <span>Octubre 2023</span>
-              <span class="ms-auto">12 min</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
 
     </div>
   </div>
 </section>
+{% endif %}
 {% endblock %}
 
 {% block subscribe %}{% endblock %}
@@ -920,97 +310,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       });
     }
   });
-});
-
-// Formulario de newsletter inline
-document.querySelector('.newsletter-form')?.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.btn-newsletter');
-  const input = this.querySelector('input[type="email"]');
-
-  if(!input.checkValidity()) {
-    input.classList.add('is-invalid');
-    return;
-  }
-
-  btn.textContent = 'Procesando...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    btn.textContent = 'Suscrito!';
-    btn.style.background = '#4CAF50';
-    input.value = '';
-  }, 1500);
-});
-
-// FUNCIONALIDAD DE COMENTARIOS
-document.getElementById('commentForm')?.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById('commentName').value;
-  const email = document.getElementById('commentEmail').value;
-  const text = document.getElementById('commentText').value;
-
-  if(!name || !email || !text) {
-    alert('Por favor completa todos los campos requeridos');
-    return;
-  }
-
-  const btn = this.querySelector('.btn-comment-submit');
-  const originalText = btn.innerHTML;
-
-  btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Enviando...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Comentario enviado!';
-    btn.style.background = '#4CAF50';
-
-    alert('Gracias por tu comentario! Sera revisado y publicado en breve.');
-
-    this.reset();
-
-    setTimeout(() => {
-      btn.innerHTML = originalText;
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 3000);
-  }, 1500);
-});
-
-// Toggle de formularios de respuesta
-function toggleReply(commentId) {
-  const replyForm = document.getElementById('reply-form-' + commentId);
-
-  document.querySelectorAll('.reply-form').forEach(form => {
-    if(form.id !== 'reply-form-' + commentId) {
-      form.style.display = 'none';
-    }
-  });
-
-  if(replyForm.style.display === 'none' || !replyForm.style.display) {
-    replyForm.style.display = 'block';
-    setTimeout(() => {
-      replyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
-  } else {
-    replyForm.style.display = 'none';
-  }
-}
-
-// Boton cargar mas comentarios
-document.querySelector('.btn-load-more')?.addEventListener('click', function() {
-  const btn = this;
-  const originalText = btn.innerHTML;
-
-  btn.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Cargando...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    alert('Esta funcionalidad requiere integracion con backend.');
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-  }, 800);
 });
 </script>
 {% endblock %}

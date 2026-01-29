@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(./env/Scripts/python.exe:*)"
+      "Bash(./env/Scripts/python.exe:*)",
+      "Bash(./env/Scripts/pip.exe install:*)"
     ]
   }
 }

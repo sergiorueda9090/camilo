@@ -1,104 +1,12 @@
 {% extends 'main/base.html' %}
-{% load static %}
 
-{% block title %}Dr. Camilo Andres Soler Rueda | Criterio Legal y Politico{% endblock %}
-
-{% block extra_css %}
-/* ===== HEADER PRINCIPAL ===== */
-header{
-  padding:80px 0 60px;
-  background:#fff;
-  text-align:center;
-  border-bottom:1px solid var(--line);
-}
-header h1{
-  font-size:3.4rem;
-  letter-spacing:-1px;
-}
-header p{
-  color:var(--gold);
-  letter-spacing:4px;
-  font-size:.8rem;
-  font-weight:600;
-  text-transform:uppercase;
-}
-
-/* ===== ARTICULO PRINCIPAL ===== */
-.article img{
-  width:100%;
-  margin-bottom:25px;
-}
-.article .lead{
-  font-style:italic;
-  color:var(--muted);
-}
-
-/* ===== AUTOR ===== */
-.author-box{
-  background:#fff;
-  border-top:4px solid var(--blue);
-  padding:35px;
-}
-.author-box img{
-  width:110px;
-  height:110px;
-  object-fit:cover;
-  border-radius:50%;
-  border:2px solid var(--gold);
-  margin-bottom:15px;
-}
-.signature{
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  color:var(--gold);
-  font-size:1.2rem;
-}
-
-/* ===== CAPSULAS JURIDICAS ===== */
-.capsules-box{
-  background:#fff;
-  border-left:3px solid var(--gold);
-  padding:30px;
-}
-
-.capsules-title{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;
-  margin-bottom:25px;
-  color:var(--blue);
-}
-
-.capsule-item{
-  margin-bottom:22px;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--line);
-}
-
-.capsule-item:last-child{
-  border-bottom:none;
-  margin-bottom:0;
-  padding-bottom:0;
-}
-
-.capsule-item h6{
-  font-family:'Playfair Display',serif;
-  font-size:1rem;
-  color:var(--blue);
-  margin-bottom:6px;
-}
-
-.capsule-item p{
-  font-size:.85rem;
-  color:var(--muted);
-  line-height:1.6;
-}
-{% endblock %}
+{% block title %}Dr. Camilo Soler Rueda | Criterio Legal y Politico{% endblock %}
 
 {% block header %}
-<!-- HEADER -->
-<header>
-  <h1>Camilo Andres Soler Rueda</h1>
-  <p>Derecho - Politica - Pensamiento Critico</p>
+<!-- HEADER HOME -->
+<header class="header-home">
+  <h1>Camilo Soler Rueda</h1>
+  <p>Derecho &middot; Politica &middot; Pensamiento Critico</p>
   <nav class="nav-links mt-4">
     <a href="#">Analisis</a>
     <a href="#">Jurisprudencia</a>
@@ -113,7 +21,7 @@ header p{
 <main class="container my-5">
   <div class="row g-5">
     <div class="col-lg-8 article">
-      <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200">
+      <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200" alt="Estado de Derecho">
       <h2>La erosion del Estado de Derecho en la praxis politica contemporanea</h2>
       <p class="lead">
         Cuando el poder se emancipa del control juridico, la democracia se vacia de contenido.
@@ -123,45 +31,43 @@ header p{
         interpretaciones flexibles del derecho que normalizan la excepcion y debilitan
         progresivamente el control constitucional.
       </p>
-      <a href="{% url 'articulo_completo' %}" class="btn-editorial mt-3">Leer columna completa</a>
+      <a href="#" class="btn-editorial mt-3">Leer columna completa</a>
     </div>
 
-<aside class="col-lg-4">
+    <aside class="col-lg-4">
 
-  <!-- PERFIL DEL AUTOR -->
-  <div class="author-box mb-4 text-center">
-    <img src="{% static 'main/images/camilo-andres-soler-rueda.jpeg' %}">
-    <h5 class="mt-3">Dr. Camilo Andres Soler Rueda</h5>
-    <p class="small text-muted">
-      Abogado constitucionalista y periodista. Analista del poder publico,
-      control institucional y democracia contemporanea.
-    </p>
-    <div class="signature mt-2">Camilo Soler R.</div>
-  </div>
+      <!-- PERFIL DEL AUTOR -->
+      {% if perfil %}
+      <div class="author-box mb-4 text-center">
+        {% if perfil.foto %}
+        <img src="{{ perfil.foto.url }}" alt="{{ perfil.nombre_completo }}">
+        {% else %}
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300" alt="{{ perfil.nombre_completo }}">
+        {% endif %}
+        <h5 class="mt-3">{{ perfil.nombre_completo }}</h5>
+        <p class="small text-muted">{{ perfil.descripcion }}</p>
+        {% if perfil.firma %}
+        <div class="signature mt-2">{{ perfil.firma }}</div>
+        {% endif %}
+      </div>
+      {% endif %}
 
-  <!-- CAPSULAS JURIDICAS -->
-  <div class="capsules-box">
-    <h6 class="capsules-title">Capsulas Juridicas</h6>
+      <!-- CAPSULAS JURIDICAS -->
+      {% if capsulas %}
+      <div class="capsules-box">
+        <h6 class="capsules-title">Capsulas Juridicas</h6>
 
-    <div class="capsule-item">
-      <h6>Responsabilidad Civil del Estado</h6>
-      <p>
-        Un breve vistazo a los fallos recientes del Consejo de Estado y su impacto
-        en la accion administrativa.
-      </p>
-    </div>
+        {% for capsula in capsulas %}
+        <div class="capsule-item">
+          <h6>{{ capsula.titulo }}</h6>
+          <p>{{ capsula.contenido }}</p>
+        </div>
+        {% endfor %}
 
-    <div class="capsule-item">
-      <h6>Justicia Digital</h6>
-      <p>
-        Estamos preparados para la descongestion judicial a traves de algoritmos
-        y automatizacion decisional?
-      </p>
-    </div>
+      </div>
+      {% endif %}
 
-  </div>
-
-</aside>
+    </aside>
   </div>
 </main>
 
@@ -173,7 +79,7 @@ header p{
 
       <div class="col-md-4">
         <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab">
+          <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab" alt="Democracia y populismo">
           <div class="p-4">
             <div class="archive-meta mb-2">Julio 2024</div>
             <h5>Democracia y populismo juridico</h5>
@@ -186,7 +92,7 @@ header p{
 
       <div class="col-md-4">
         <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Constitucion y poder">
           <div class="p-4">
             <div class="archive-meta mb-2">Marzo 2024</div>
             <h5>Constitucion y poder ejecutivo</h5>
@@ -199,7 +105,7 @@ header p{
 
       <div class="col-md-4">
         <div class="archive-card">
-          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="Justicia constitucional">
           <div class="p-4">
             <div class="archive-meta mb-2">Octubre 2023</div>
             <h5>Justicia constitucional y opinion publica</h5>

@@ -1,5 +1,4 @@
 {% extends 'main/base.html' %}
-{% load static %}
 
 {% block title %}La erosion del Estado de Derecho en la praxis politica contemporanea | Dr. Camilo Soler Rueda{% endblock %}
 
@@ -17,342 +16,7 @@
 {% endblock %}
 
 {% block extra_css %}
-/* ===== HEADER COMPACTO ===== */
-header{
-  padding:25px 0;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
-.header-logo{
-  font-family:'Playfair Display',serif;
-  font-size:1.5rem;
-  color:var(--blue);
-  font-weight:900;
-}
-
-/* ===== BREADCRUMBS ===== */
-.breadcrumb-editorial{
-  background:none;
-  padding:20px 0;
-  font-size:.75rem;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-}
-.breadcrumb-editorial a{
-  color:var(--muted);
-}
-.breadcrumb-editorial .active{
-  color:var(--gold);
-}
-
-/* ===== ARTICULO HERO ===== */
-.article-hero{
-  padding:60px 0 40px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-}
-.article-category{
-  display:inline-block;
-  background:var(--blue);
-  color:#fff;
-  padding:5px 15px;
-  font-size:.7rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-.article-title{
-  font-size:2.8rem;
-  line-height:1.2;
-  margin-bottom:25px;
-}
-.article-lead{
-  font-size:1.3rem;
-  color:var(--muted);
-  font-style:italic;
-  font-family:'Merriweather',serif;
-  margin-bottom:30px;
-}
-.article-meta{
-  display:flex;
-  align-items:center;
-  gap:25px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  flex-wrap:wrap;
-}
-.meta-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:.85rem;
-  color:var(--muted);
-}
-.meta-item i{
-  color:var(--gold);
-  font-size:1rem;
-}
-
-/* ===== IMAGEN DESTACADA ===== */
-.featured-image{
-  width:100%;
-  height:500px;
-  object-fit:cover;
-  margin-bottom:50px;
-}
-
-/* ===== CONTENIDO DEL ARTICULO ===== */
-.article-content{
-  font-family:'Merriweather',serif;
-  font-size:1.1rem;
-  line-height:1.9;
-  color:#2a2a2a;
-}
-.article-content p{
-  margin-bottom:1.8rem;
-}
-.article-content h2{
-  font-size:1.8rem;
-  margin-top:3rem;
-  margin-bottom:1.5rem;
-}
-.article-content h3{
-  font-size:1.4rem;
-  margin-top:2.5rem;
-  margin-bottom:1.2rem;
-}
-
-/* ===== CITA DESTACADA ===== */
-.pullquote{
-  border-left:4px solid var(--gold);
-  padding:30px 40px;
-  margin:40px 0;
-  background:#f9f9f8;
-  font-family:'Playfair Display',serif;
-  font-size:1.4rem;
-  font-style:italic;
-  color:var(--blue);
-  line-height:1.6;
-}
-.pullquote-author{
-  font-family:'Inter',sans-serif;
-  font-size:.9rem;
-  font-style:normal;
-  color:var(--muted);
-  margin-top:15px;
-}
-
-/* ===== COMPARTIR ===== */
-.share-section{
-  background:#fff;
-  border:1px solid var(--line);
-  padding:25px;
-  margin:50px 0;
-  text-align:center;
-}
-.share-title{
-  font-family:'Inter',sans-serif;
-  font-size:.85rem;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  color:var(--muted);
-  margin-bottom:20px;
-}
-.share-buttons a{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:45px;
-  height:45px;
-  border:1px solid var(--line);
-  margin:0 5px;
-  font-size:1.2rem;
-  color:var(--blue);
-  transition:.3s;
-}
-.share-buttons a:hover{
-  background:var(--blue);
-  color:#fff;
-  border-color:var(--blue);
-}
-
-/* ===== AUTOR BOX ===== */
-.author-box-article{
-  background:#fff;
-  border-top:4px solid var(--blue);
-  padding:40px;
-  margin:50px 0;
-  display:flex;
-  gap:30px;
-  align-items:center;
-}
-.author-box-article img{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:3px solid var(--gold);
-  object-fit:cover;
-}
-.author-info h5{
-  font-family:'Playfair Display',serif;
-  font-size:1.3rem;
-  margin-bottom:10px;
-}
-.author-info p{
-  font-size:.95rem;
-  color:var(--muted);
-  margin-bottom:15px;
-}
-.author-social a{
-  margin-right:15px;
-  font-size:1.1rem;
-}
-
-/* ===== ARTICULOS RELACIONADOS ===== */
-.related-articles{
-  background:#f6f6f4;
-  padding:70px 0;
-  border-top:1px solid var(--line);
-}
-.related-card{
-  background:#fff;
-  border:1px solid #ddd;
-  transition:.35s;
-  height:100%;
-}
-.related-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 25px 45px rgba(0,0,0,.08);
-}
-.related-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-.related-meta{
-  font-size:.7rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--gold);
-}
-
-/* ===== NAVEGACION ENTRE ARTICULOS ===== */
-.article-navigation{
-  background:#fff;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:30px 0;
-}
-.nav-article{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  padding:20px;
-  border:1px solid var(--line);
-  transition:.3s;
-}
-.nav-article:hover{
-  background:#f9f9f8;
-  border-color:var(--gold);
-}
-.nav-label{
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  color:var(--gold);
-  margin-bottom:8px;
-}
-.nav-title{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;
-  color:var(--blue);
-}
-
-/* ===== SIDEBAR ===== */
-.sidebar-box{
-  background:#fff;
-  border:1px solid var(--line);
-  padding:30px;
-  margin-bottom:30px;
-}
-.sidebar-title{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;
-  margin-bottom:20px;
-  color:var(--blue);
-  border-bottom:2px solid var(--gold);
-  padding-bottom:12px;
-}
-.sidebar-item{
-  margin-bottom:20px;
-  padding-bottom:20px;
-  border-bottom:1px solid var(--line);
-}
-.sidebar-item:last-child{
-  border:none;
-  margin-bottom:0;
-  padding-bottom:0;
-}
-.sidebar-item h6{
-  font-size:.95rem;
-  margin-bottom:8px;
-}
-.sidebar-item h6 a{
-  color:var(--blue);
-}
-.sidebar-item h6 a:hover{
-  color:var(--gold);
-}
-.sidebar-date{
-  font-size:.75rem;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* ===== NEWSLETTER INLINE ===== */
-.newsletter-inline{
-  background:linear-gradient(135deg, var(--blue) 0%, #2a3557 100%);
-  color:#fff;
-  padding:40px;
-  margin:50px 0;
-  text-align:center;
-}
-.newsletter-inline h4{
-  color:#fff;
-  margin-bottom:15px;
-}
-.newsletter-inline p{
-  color:rgba(255,255,255,0.85);
-  margin-bottom:25px;
-}
-.newsletter-form input{
-  border:none;
-  padding:12px 18px;
-  width:100%;
-  margin-bottom:10px;
-}
-.btn-newsletter{
-  background:var(--gold);
-  color:var(--blue);
-  border:none;
-  padding:12px 30px;
-  font-size:.8rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:600;
-  width:100%;
-  transition:.3s;
-}
-.btn-newsletter:hover{
-  background:#c4a468;
-}
-
-/* ===== SECCION DE DEBATE Y COMENTARIOS ===== */
+/* ===== ESTILOS ESPECIFICOS PARA COMENTARIOS ===== */
 .debate-section{
   background:#fff;
   border-top:3px solid var(--gold);
@@ -620,18 +284,8 @@ header{
   line-height:1.6;
 }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE COMENTARIOS */
 @media (max-width: 768px) {
-  .article-title{font-size:2rem;}
-  .article-lead{font-size:1.1rem;}
-  .featured-image{height:300px;}
-  .article-content{font-size:1rem;}
-  .pullquote{font-size:1.2rem; padding:20px;}
-  .author-box-article{flex-direction:column; text-align:center;}
-  .nav-links a{display:block; margin:10px 0;}
-  .article-meta{flex-direction:column; align-items:flex-start;}
-
-  /* Comentarios responsive */
   .comment-item{flex-direction:column; gap:15px;}
   .comment-avatar i{font-size:2.5rem;}
   .comments-header{flex-direction:column; align-items:flex-start; gap:15px;}
@@ -641,8 +295,8 @@ header{
 {% endblock %}
 
 {% block header %}
-<!-- HEADER -->
-<header>
+<!-- HEADER COMPACTO -->
+<header class="header-compact">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <a href="{% url 'home' %}" class="header-logo">Camilo Soler Rueda</a>
@@ -655,7 +309,9 @@ header{
     </div>
   </div>
 </header>
+{% endblock %}
 
+{% block content %}
 <!-- BREADCRUMBS -->
 <div class="container">
   <nav aria-label="breadcrumb">
@@ -701,9 +357,7 @@ header{
     </div>
   </div>
 </section>
-{% endblock %}
 
-{% block content %}
 <!-- CONTENIDO PRINCIPAL -->
 <main class="container my-5">
   <div class="row g-5">
@@ -801,53 +455,6 @@ header{
           <div class="pullquote-author">- Sobre la eficacia del derecho constitucional</div>
         </div>
 
-        <h2>La dimension comparada: lecciones desde otras latitudes</h2>
-
-        <p>
-          El analisis comparado ofrece lecciones valiosas. En diversos paises de Europa del Este, America
-          Latina y otras regiones, hemos presenciado procesos similares de erosion democratica que
-          comparten patrones identificables: la polarizacion extrema del debate publico, la construccion
-          de narrativas de enemigos internos, la descalificacion sistematica de la oposicion y de la
-          prensa independiente, y la gradual captura de las instituciones de control.
-        </p>
-
-        <p>
-          Estos casos demuestran que la erosion democratica no es un fenomeno exclusivo de democracias
-          jovenes o economicamente debiles. Por el contrario, democracias consolidadas con larga tradicion
-          constitucional tambien pueden experimentar procesos de retroceso si no se mantiene una vigilancia
-          constante sobre el ejercicio del poder.
-        </p>
-
-        <h2>Los desafios del constitucionalismo contemporaneo</h2>
-
-        <p>
-          El constitucionalismo del siglo XXI enfrenta el desafio de adaptarse a nuevas formas de erosion
-          democratica sin perder sus principios fundamentales. Esto requiere repensar tanto los mecanismos
-          de control como las garantias de independencia de las instituciones.
-        </p>
-
-        <p>
-          Entre las respuestas posibles se encuentra el fortalecimiento de la sociedad civil organizada,
-          el desarrollo de mecanismos mas robustos de transparencia y rendicion de cuentas, la proteccion
-          reforzada de la libertad de prensa, y la construccion de coaliciones amplias en defensa de
-          valores democraticos fundamentales.
-        </p>
-
-        <h3>El rol de la ciudadania informada</h3>
-
-        <p>
-          La defensa del Estado de Derecho no puede recaer exclusivamente en las instituciones formales.
-          Requiere tambien una ciudadania informada, critica y activa, capaz de identificar los sintomas
-          del deterioro institucional antes de que alcancen un punto de no retorno.
-        </p>
-
-        <p>
-          Esta ciudadania vigilante debe estar preparada para reconocer las senales de alarma: la
-          concentracion excesiva de poder, los ataques a instituciones independientes, la estigmatizacion
-          de la critica, la instrumentalizacion de la justicia con fines politicos y la manipulacion
-          de los procesos electorales.
-        </p>
-
         <h2>Reflexiones finales</h2>
 
         <p>
@@ -905,7 +512,7 @@ header{
 
       <!-- AUTOR BOX -->
       <div class="author-box-article">
-        <img src="{% static 'main/images/camilo-andres-soler-rueda.jpeg' %}"
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300"
              alt="Dr. Camilo Soler Rueda">
         <div class="author-info">
           <h5>Dr. Camilo Soler Rueda</h5>
@@ -1049,8 +656,7 @@ header{
                 Excelente analisis sobre la erosion institucional. Me parece particularmente relevante
                 el punto sobre la normalizacion de la excepcion. En nuestra investigacion sobre estados
                 de emergencia en America Latina, hemos documentado como estos mecanismos excepcionales
-                se han convertido en herramientas ordinarias de gobierno, lo que genera un deterioro
-                progresivo del Estado de Derecho sin que exista una ruptura constitucional evidente.
+                se han convertido en herramientas ordinarias de gobierno.
               </div>
               <div class="comment-actions">
                 <button class="comment-action-btn" onclick="toggleReply(1)">
@@ -1059,26 +665,6 @@ header{
                 <button class="comment-action-btn">
                   <i class="bi bi-hand-thumbs-up"></i> Util (8)
                 </button>
-              </div>
-
-              <!-- RESPUESTA -->
-              <div class="comment-reply" id="reply-1" style="display:none;">
-                <div class="comment-avatar">
-                  <i class="bi bi-person-circle"></i>
-                </div>
-                <div class="comment-content">
-                  <div class="comment-meta">
-                    <strong class="comment-author">Dr. Camilo Soler Rueda</strong>
-                    <span class="comment-badge">Autor</span>
-                    <span class="comment-date">Hace 1 dia</span>
-                  </div>
-                  <div class="comment-text">
-                    Dra. Gomez, muchas gracias por su aporte. Precisamente ese fenomeno de la
-                    "normalizacion de lo excepcional" es uno de los aspectos mas preocupantes del
-                    deterioro democratico contemporaneo. Seria muy valioso conocer mas sobre su
-                    investigacion comparada. Han identificado patrones comunes entre diferentes paises?
-                  </div>
-                </div>
               </div>
 
               <!-- FORMULARIO DE RESPUESTA -->
@@ -1111,8 +697,7 @@ header{
                 El articulo plantea una reflexion necesaria. Desde mi experiencia en la Corte,
                 puedo confirmar que las presiones sobre el control judicial constitucional son
                 cada vez mas sofisticadas. Ya no se trata solo de ataques frontales, sino de
-                estrategias graduales que buscan limitar la independencia judicial mediante
-                reformas aparentemente tecnicas o administrativas.
+                estrategias graduales que buscan limitar la independencia judicial.
               </div>
               <div class="comment-actions">
                 <button class="comment-action-btn" onclick="toggleReply(2)">
@@ -1337,8 +922,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Formulario de newsletter
-document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+// Formulario de newsletter inline
+document.querySelector('.newsletter-form')?.addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = this.querySelector('.btn-newsletter');
   const input = this.querySelector('input[type="email"]');
@@ -1351,7 +936,6 @@ document.querySelector('.newsletter-form').addEventListener('submit', function(e
   btn.textContent = 'Procesando...';
   btn.disabled = true;
 
-  // Simular envio
   setTimeout(() => {
     btn.textContent = 'Suscrito!';
     btn.style.background = '#4CAF50';
@@ -1360,13 +944,11 @@ document.querySelector('.newsletter-form').addEventListener('submit', function(e
 });
 
 // FUNCIONALIDAD DE COMENTARIOS
-// Formulario de comentarios
-document.getElementById('commentForm').addEventListener('submit', function(e) {
+document.getElementById('commentForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
 
   const name = document.getElementById('commentName').value;
   const email = document.getElementById('commentEmail').value;
-  const position = document.getElementById('commentPosition').value;
   const text = document.getElementById('commentText').value;
 
   if(!name || !email || !text) {
@@ -1374,7 +956,6 @@ document.getElementById('commentForm').addEventListener('submit', function(e) {
     return;
   }
 
-  // Simular envio exitoso
   const btn = this.querySelector('.btn-comment-submit');
   const originalText = btn.innerHTML;
 
@@ -1385,13 +966,10 @@ document.getElementById('commentForm').addEventListener('submit', function(e) {
     btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Comentario enviado!';
     btn.style.background = '#4CAF50';
 
-    // Mostrar mensaje
     alert('Gracias por tu comentario! Sera revisado y publicado en breve.');
 
-    // Limpiar formulario
     this.reset();
 
-    // Restaurar boton
     setTimeout(() => {
       btn.innerHTML = originalText;
       btn.style.background = '';
@@ -1404,17 +982,14 @@ document.getElementById('commentForm').addEventListener('submit', function(e) {
 function toggleReply(commentId) {
   const replyForm = document.getElementById('reply-form-' + commentId);
 
-  // Cerrar todos los demas formularios de respuesta
   document.querySelectorAll('.reply-form').forEach(form => {
     if(form.id !== 'reply-form-' + commentId) {
       form.style.display = 'none';
     }
   });
 
-  // Toggle del formulario actual
   if(replyForm.style.display === 'none' || !replyForm.style.display) {
     replyForm.style.display = 'block';
-    // Scroll suave al formulario
     setTimeout(() => {
       replyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
@@ -1424,7 +999,7 @@ function toggleReply(commentId) {
 }
 
 // Boton cargar mas comentarios
-document.querySelector('.btn-load-more').addEventListener('click', function() {
+document.querySelector('.btn-load-more')?.addEventListener('click', function() {
   const btn = this;
   const originalText = btn.innerHTML;
 

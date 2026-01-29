@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}Dr. Camilo Andres Soler Rueda{% endblock %}</title>
+<title>{% block title %}Dr. Camilo Soler Rueda | Criterio Legal y Politico{% endblock %}</title>
 
 {% block meta_tags %}{% endblock %}
 
@@ -71,6 +71,42 @@ a:hover{color:var(--gold);}
   to{transform:translateX(-100%)}
 }
 
+/* ===== HEADER HOME ===== */
+.header-home{
+  padding:80px 0 60px;
+  background:#fff;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+}
+.header-home h1{
+  font-size:3.4rem;
+  letter-spacing:-1px;
+}
+.header-home p{
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:.8rem;
+  font-weight:600;
+  text-transform:uppercase;
+}
+
+/* ===== HEADER COMPACTO ===== */
+.header-compact{
+  padding:25px 0;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.header-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  color:var(--blue);
+  font-weight:900;
+}
+
 /* ===== NAV LINKS ===== */
 .nav-links a{
   margin:0 18px;
@@ -104,6 +140,71 @@ a:hover{color:var(--gold);}
 .btn-editorial:hover{
   background:var(--blue);
   color:#fff;
+}
+
+/* ===== AUTOR ===== */
+.author-box{
+  background:#fff;
+  border-top:4px solid var(--blue);
+  padding:35px;
+}
+.author-box img{
+  width:110px;
+  height:110px;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  margin-bottom:15px;
+}
+.signature{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  color:var(--gold);
+  font-size:1.2rem;
+}
+
+/* ===== ARTICULO PRINCIPAL ===== */
+.article img{
+  width:100%;
+  margin-bottom:25px;
+}
+.article .lead{
+  font-style:italic;
+  color:var(--muted);
+}
+
+/* ===== CAPSULAS JURIDICAS ===== */
+.capsules-box{
+  background:#fff;
+  border-left:3px solid var(--gold);
+  padding:30px;
+}
+.capsules-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  margin-bottom:25px;
+  color:var(--blue);
+}
+.capsule-item{
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.capsule-item:last-child{
+  border-bottom:none;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+.capsule-item h6{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  color:var(--blue);
+  margin-bottom:6px;
+}
+.capsule-item p{
+  font-size:.85rem;
+  color:var(--muted);
+  line-height:1.6;
 }
 
 /* ===== ARCHIVO EDITORIAL ===== */
@@ -144,7 +245,6 @@ a:hover{color:var(--gold);}
   padding:90px 0;
   border-top:1px solid rgba(255,255,255,0.15);
 }
-
 .subscribe-eyebrow{
   display:block;
   font-size:.75rem;
@@ -153,27 +253,23 @@ a:hover{color:var(--gold);}
   color:var(--gold);
   margin-bottom:15px;
 }
-
 .subscribe-title{
   font-family:'Playfair Display',serif;
   font-size:2.2rem;
   color:#fff;
   margin-bottom:20px;
 }
-
 .subscribe-description{
   font-size:1rem;
   color:rgba(255,255,255,0.8);
   max-width:650px;
   margin:0 auto;
 }
-
 .subscribe-form input{
   border:none;
   padding:14px 18px;
   font-size:.95rem;
 }
-
 .btn-subscribe{
   background:none;
   border:1px solid var(--gold);
@@ -184,12 +280,10 @@ a:hover{color:var(--gold);}
   padding:14px 10px;
   transition:.3s ease;
 }
-
 .btn-subscribe:hover{
   background:var(--gold);
   color:var(--blue);
 }
-
 .subscribe-note{
   font-size:.75rem;
   color:rgba(255,255,255,0.6);
@@ -211,20 +305,348 @@ footer h5, footer h6{
 .social-editorial a{
   line-height:1.4;
 }
-
 .social-icon{
   font-size:1.1rem;
   color:var(--gold);
   margin-top:2px;
   min-width:20px;
 }
-
 .social-editorial a:hover{
   opacity:1 !important;
 }
-
 .social-editorial a:hover .social-icon{
   color:#fff;
+}
+
+/* ===== BREADCRUMBS ===== */
+.breadcrumb-editorial{
+  background:none;
+  padding:20px 0;
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+}
+.breadcrumb-editorial a{
+  color:var(--muted);
+}
+.breadcrumb-editorial .active{
+  color:var(--gold);
+}
+
+/* ===== ARTICULO HERO ===== */
+.article-hero{
+  padding:60px 0 40px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.article-category{
+  display:inline-block;
+  background:var(--blue);
+  color:#fff;
+  padding:5px 15px;
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+.article-title{
+  font-size:2.8rem;
+  line-height:1.2;
+  margin-bottom:25px;
+}
+.article-lead{
+  font-size:1.3rem;
+  color:var(--muted);
+  font-style:italic;
+  font-family:'Merriweather',serif;
+  margin-bottom:30px;
+}
+.article-meta{
+  display:flex;
+  align-items:center;
+  gap:25px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.meta-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.85rem;
+  color:var(--muted);
+}
+.meta-item i{
+  color:var(--gold);
+  font-size:1rem;
+}
+
+/* ===== IMAGEN DESTACADA ===== */
+.featured-image{
+  width:100%;
+  height:500px;
+  object-fit:cover;
+  margin-bottom:50px;
+}
+
+/* ===== CONTENIDO DEL ARTICULO ===== */
+.article-content{
+  font-family:'Merriweather',serif;
+  font-size:1.1rem;
+  line-height:1.9;
+  color:#2a2a2a;
+}
+.article-content p{
+  margin-bottom:1.8rem;
+}
+.article-content h2{
+  font-size:1.8rem;
+  margin-top:3rem;
+  margin-bottom:1.5rem;
+}
+.article-content h3{
+  font-size:1.4rem;
+  margin-top:2.5rem;
+  margin-bottom:1.2rem;
+}
+
+/* ===== CITA DESTACADA ===== */
+.pullquote{
+  border-left:4px solid var(--gold);
+  padding:30px 40px;
+  margin:40px 0;
+  background:#f9f9f8;
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  font-style:italic;
+  color:var(--blue);
+  line-height:1.6;
+}
+.pullquote-author{
+  font-family:'Inter',sans-serif;
+  font-size:.9rem;
+  font-style:normal;
+  color:var(--muted);
+  margin-top:15px;
+}
+
+/* ===== COMPARTIR ===== */
+.share-section{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:25px;
+  margin:50px 0;
+  text-align:center;
+}
+.share-title{
+  font-family:'Inter',sans-serif;
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.share-buttons a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:45px;
+  height:45px;
+  border:1px solid var(--line);
+  margin:0 5px;
+  font-size:1.2rem;
+  color:var(--blue);
+  transition:.3s;
+}
+.share-buttons a:hover{
+  background:var(--blue);
+  color:#fff;
+  border-color:var(--blue);
+}
+
+/* ===== AUTOR BOX ARTICULO ===== */
+.author-box-article{
+  background:#fff;
+  border-top:4px solid var(--blue);
+  padding:40px;
+  margin:50px 0;
+  display:flex;
+  gap:30px;
+  align-items:center;
+}
+.author-box-article img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  object-fit:cover;
+}
+.author-info h5{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  margin-bottom:10px;
+}
+.author-info p{
+  font-size:.95rem;
+  color:var(--muted);
+  margin-bottom:15px;
+}
+.author-social a{
+  margin-right:15px;
+  font-size:1.1rem;
+}
+
+/* ===== ARTICULOS RELACIONADOS ===== */
+.related-articles{
+  background:#f6f6f4;
+  padding:70px 0;
+  border-top:1px solid var(--line);
+}
+.related-card{
+  background:#fff;
+  border:1px solid #ddd;
+  transition:.35s;
+  height:100%;
+}
+.related-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 25px 45px rgba(0,0,0,.08);
+}
+.related-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.related-meta{
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ===== NAVEGACION ENTRE ARTICULOS ===== */
+.article-navigation{
+  background:#fff;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:30px 0;
+}
+.nav-article{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:20px;
+  border:1px solid var(--line);
+  transition:.3s;
+}
+.nav-article:hover{
+  background:#f9f9f8;
+  border-color:var(--gold);
+}
+.nav-label{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.nav-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  color:var(--blue);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar-box{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:30px;
+  margin-bottom:30px;
+}
+.sidebar-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  margin-bottom:20px;
+  color:var(--blue);
+  border-bottom:2px solid var(--gold);
+  padding-bottom:12px;
+}
+.sidebar-item{
+  margin-bottom:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+.sidebar-item:last-child{
+  border:none;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+.sidebar-item h6{
+  font-size:.95rem;
+  margin-bottom:8px;
+}
+.sidebar-item h6 a{
+  color:var(--blue);
+}
+.sidebar-item h6 a:hover{
+  color:var(--gold);
+}
+.sidebar-date{
+  font-size:.75rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* ===== NEWSLETTER INLINE ===== */
+.newsletter-inline{
+  background:linear-gradient(135deg, var(--blue) 0%, #2a3557 100%);
+  color:#fff;
+  padding:40px;
+  margin:50px 0;
+  text-align:center;
+}
+.newsletter-inline h4{
+  color:#fff;
+  margin-bottom:15px;
+}
+.newsletter-inline p{
+  color:rgba(255,255,255,0.85);
+  margin-bottom:25px;
+}
+.newsletter-form input{
+  border:none;
+  padding:12px 18px;
+  width:100%;
+  margin-bottom:10px;
+}
+.btn-newsletter{
+  background:var(--gold);
+  color:var(--blue);
+  border:none;
+  padding:12px 30px;
+  font-size:.8rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:600;
+  width:100%;
+  transition:.3s;
+}
+.btn-newsletter:hover{
+  background:#c4a468;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header-home h1{font-size:2.2rem;}
+  .article-title{font-size:2rem;}
+  .article-lead{font-size:1.1rem;}
+  .featured-image{height:300px;}
+  .article-content{font-size:1rem;}
+  .pullquote{font-size:1.2rem; padding:20px;}
+  .author-box-article{flex-direction:column; text-align:center;}
+  .nav-links a{display:block; margin:10px 0;}
+  .article-meta{flex-direction:column; align-items:flex-start;}
 }
 
 {% block extra_css %}{% endblock %}
@@ -237,8 +659,8 @@ footer h5, footer h6{
 <div class="editorial-ticker">
   <div class="ticker-track">
     <span>
-      Estado de Derecho * Constitucionalismo * Analisis Politico * Opinion Juridica *
-      Democracia & Poder * Separacion de Poderes * Control Constitucional
+      Estado de Derecho &bull; Constitucionalismo &bull; Analisis Politico &bull; Opinion Juridica &bull;
+      Democracia & Poder &bull; Separacion de Poderes &bull; Control Constitucional
     </span>
   </div>
 </div>
@@ -269,12 +691,13 @@ footer h5, footer h6{
         </p>
 
         <div class="subscribe-form mt-4">
-          <form class="row g-2 justify-content-center">
+          <form class="row g-2 justify-content-center" id="subscribeForm">
             <div class="col-md-7">
               <input
                 type="email"
                 class="form-control form-control-lg rounded-0"
                 placeholder="Correo electronico profesional"
+                required
               >
             </div>
             <div class="col-md-3">
@@ -303,7 +726,7 @@ footer h5, footer h6{
       <!-- SOBRE EL AUTOR -->
       <div class="col-md-4">
         <h5 class="mb-3" style="font-family:'Playfair Display',serif;">
-          Camilo Andres Soler Rueda
+          Camilo Soler Rueda
         </h5>
         <p class="small">
           Abogado constitucionalista, columnista y analista politico.
@@ -311,14 +734,8 @@ footer h5, footer h6{
         </p>
         <p class="small">
           Este espacio reune columnas, analisis y reflexiones juridicas
-          publicadas a lo largo de los anios.
+          publicadas a lo largo de los anos.
         </p>
-        <div class="mt-4">
-          <a href="#" class="text-light me-3"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
-          <a href="#" class="text-light me-3"><i class="bi bi-youtube"></i></a>
-          <a href="#" class="text-light"><i class="bi bi-envelope"></i></a>
-        </div>
       </div>
 
       <!-- COLUMNAS / NOTICIAS ANTIGUAS -->
@@ -330,28 +747,28 @@ footer h5, footer h6{
         <ul class="list-unstyled small">
           <li class="mb-2">
             <a href="#" class="text-decoration-none text-light opacity-75">
-              > El decisionismo politico y sus limites constitucionales
+              &#9656; El decisionismo politico y sus limites constitucionales
             </a>
             <div class="opacity-50">Julio 2024</div>
           </li>
 
           <li class="mb-2">
             <a href="#" class="text-decoration-none text-light opacity-75">
-              > Democracia, poder y crisis de legitimidad
+              &#9656; Democracia, poder y crisis de legitimidad
             </a>
             <div class="opacity-50">Marzo 2024</div>
           </li>
 
           <li class="mb-2">
             <a href="#" class="text-decoration-none text-light opacity-75">
-              > Justicia constitucional en tiempos de polarizacion
+              &#9656; Justicia constitucional en tiempos de polarizacion
             </a>
             <div class="opacity-50">Octubre 2023</div>
           </li>
 
           <li>
             <a href="#" class="text-decoration-none text-light opacity-75">
-              > El juez como ultimo garante institucional
+              &#9656; El juez como ultimo garante institucional
             </a>
             <div class="opacity-50">Febrero 2023</div>
           </li>
@@ -415,7 +832,7 @@ footer h5, footer h6{
     <hr class="my-4 border-secondary">
 
     <div class="text-center small opacity-75">
-      &copy; 2026 Camilo Andres Soler Rueda - Todos los derechos reservados<br>
+      &copy; {% now "Y" %} Camilo Soler Rueda &middot; Todos los derechos reservados<br>
       Opinion juridica y analisis politico independiente
     </div>
   </div>
@@ -423,6 +840,30 @@ footer h5, footer h6{
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Formulario de suscripcion
+document.getElementById('subscribeForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.btn-subscribe');
+  const input = this.querySelector('input[type="email"]');
+
+  if(!input.checkValidity()) {
+    input.classList.add('is-invalid');
+    return;
+  }
+
+  btn.textContent = 'Procesando...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.textContent = '&#10003; Suscrito!';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = 'var(--blue)';
+    input.value = '';
+  }, 1500);
+});
+</script>
 
 {% block extra_js %}{% endblock %}
 

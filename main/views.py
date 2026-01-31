@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import PerfilAutor, CapsulaJuridica, Articulo
+from .models import PerfilAutor, CapsulaJuridica, Articulo, RedSocial
 
 
 def home(request):
@@ -16,6 +16,7 @@ def home(request):
     context = {
         'perfil': PerfilAutor.get_perfil(),
         'capsulas': CapsulaJuridica.get_activas(),
+        'redes_sociales': RedSocial.get_activas(),
         'articulo_destacado': articulo_destacado,
         'articulos_archivo': articulos_archivo,
     }
@@ -54,6 +55,7 @@ def articulo_detalle(request, slug):
     context = {
         'perfil': PerfilAutor.get_perfil(),
         'capsulas': CapsulaJuridica.get_activas(),
+        'redes_sociales': RedSocial.get_activas(),
         'articulo': articulo,
         'relacionados': relacionados,
         'articulo_anterior': articulo_anterior,

@@ -245,3 +245,55 @@ class Articulo(models.Model):
         if not destacado:
             destacado = cls.objects.filter(estado='publicado').first()
         return destacado
+
+
+class RedSocial(models.Model):
+    """Redes sociales del autor para el footer"""
+
+    ICONOS_CHOICES = [
+        ('bi-twitter-x', 'X (Twitter)'),
+        ('bi-linkedin', 'LinkedIn'),
+        ('bi-youtube', 'YouTube'),
+        ('bi-instagram', 'Instagram'),
+        ('bi-facebook', 'Facebook'),
+        ('bi-tiktok', 'TikTok'),
+        ('bi-spotify', 'Spotify'),
+        ('bi-envelope', 'Email'),
+        ('bi-globe', 'Sitio Web'),
+    ]
+
+    nombre = models.CharField(
+        max_length=100,
+        help_text="Nombre visible de la red social, ej: YouTube / Podcast"
+    )
+    descripcion = models.CharField(
+        max_length=200,
+        help_text="Descripcion breve del contenido en esta red"
+    )
+    url = models.URLField(
+        max_length=500,
+        help_text="Enlace al perfil o canal"
+    )
+    icono = models.CharField(
+        max_length=50,
+        choices=ICONOS_CHOICES,
+        help_text="Icono de Bootstrap Icons"
+    )
+    orden = models.PositiveIntegerField(
+        default=0,
+        help_text="Menor numero aparece primero"
+    )
+    activo = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'Red Social'
+        verbose_name_plural = 'Redes Sociales'
+        ordering = ['orden', 'nombre']
+
+    def __str__(self):
+        return self.nombre
+
+    @classmethod
+    def get_activas(cls):
+        """Obtiene las redes sociales activas ordenadas"""
+        return cls.objects.filter(activo=True)

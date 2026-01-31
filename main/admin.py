@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import PerfilAutor, CapsulaJuridica, Categoria, Articulo
+from .models import PerfilAutor, CapsulaJuridica, Categoria, Articulo, RedSocial
 
 
 @admin.register(PerfilAutor)
@@ -101,3 +101,21 @@ class ArticuloAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+@admin.register(RedSocial)
+class RedSocialAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'icono_preview', 'descripcion_corta', 'orden', 'activo']
+    list_editable = ['orden', 'activo']
+    list_filter = ['activo', 'icono']
+    search_fields = ['nombre', 'descripcion']
+
+    def icono_preview(self, obj):
+        return format_html('<i class="bi {}"></i> {}', obj.icono, obj.get_icono_display())
+    icono_preview.short_description = 'Icono'
+
+    def descripcion_corta(self, obj):
+        if len(obj.descripcion) > 50:
+            return obj.descripcion[:50] + '...'
+        return obj.descripcion
+    descripcion_corta.short_description = 'Descripcion'

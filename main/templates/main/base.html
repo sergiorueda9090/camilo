@@ -782,47 +782,19 @@ footer h5, footer h6{
         </h6>
 
         <ul class="list-unstyled small social-editorial">
-
-          <li class="mb-3">
-            <a href="#" class="text-decoration-none text-light opacity-75 d-flex align-items-start gap-2">
-              <i class="bi bi-twitter-x social-icon"></i>
+          {% for red in redes_sociales %}
+          <li class="{% if not forloop.last %}mb-3{% endif %}">
+            <a href="{{ red.url }}" class="text-decoration-none text-light opacity-75 d-flex align-items-start gap-2" target="_blank" rel="noopener">
+              <i class="bi {{ red.icono }} social-icon"></i>
               <span>
-                <strong>X (Twitter)</strong><br>
-                Opinion politica y analisis de coyuntura
+                <strong>{{ red.nombre }}</strong><br>
+                {{ red.descripcion }}
               </span>
             </a>
           </li>
-
-          <li class="mb-3">
-            <a href="#" class="text-decoration-none text-light opacity-75 d-flex align-items-start gap-2">
-              <i class="bi bi-linkedin social-icon"></i>
-              <span>
-                <strong>LinkedIn</strong><br>
-                Perfil academico y trayectoria profesional
-              </span>
-            </a>
-          </li>
-
-          <li class="mb-3">
-            <a href="#" class="text-decoration-none text-light opacity-75 d-flex align-items-start gap-2">
-              <i class="bi bi-youtube social-icon"></i>
-              <span>
-                <strong>YouTube / Podcast</strong><br>
-                Analisis juridico en profundidad
-              </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="text-decoration-none text-light opacity-75 d-flex align-items-start gap-2">
-              <i class="bi bi-instagram social-icon"></i>
-              <span>
-                <strong>Instagram</strong><br>
-                Archivo visual, conferencias y publicaciones
-              </span>
-            </a>
-          </li>
-
+          {% empty %}
+          <li class="text-light opacity-50">Sin redes sociales configuradas</li>
+          {% endfor %}
         </ul>
       </div>
 

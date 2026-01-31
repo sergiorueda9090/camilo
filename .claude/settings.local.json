@@ -6,7 +6,9 @@
       "Bash(env\\\\Scripts\\\\python manage.py makemigrations:*)",
       "Bash(env\\\\Scripts\\\\python.exe manage.py makemigrations:*)",
       "Bash(python manage.py makemigrations:*)",
-      "Bash(\"env\\\\Scripts\\\\python.exe\" manage.py:*)"
+      "Bash(\"env\\\\Scripts\\\\python.exe\" manage.py:*)",
+      "Bash(\"env\\\\Scripts\\\\pip.exe\" install:*)",
+      "Bash(\"env\\\\Scripts\\\\python.exe\" manage.py check)"
     ]
   }
 }

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}Dr. Camilo Soler Rueda | Criterio Legal y Politico{% endblock %}</title>
+<title>{% block title %}Dr. Camilo Andres Soler Rueda | Criterio Legal y Politico{% endblock %}</title>
 
 {% block meta_tags %}{% endblock %}
 
@@ -725,17 +725,17 @@ footer h5, footer h6{
 
       <!-- SOBRE EL AUTOR -->
       <div class="col-md-4">
+        {% if perfil %}
         <h5 class="mb-3" style="font-family:'Playfair Display',serif;">
-          Camilo Soler Rueda
+          {{ perfil.nombre }}
         </h5>
-        <p class="small">
-          Abogado constitucionalista, columnista y analista politico.
-          Especialista en control del poder, democracia y Estado de Derecho.
-        </p>
-        <p class="small">
-          Este espacio reune columnas, analisis y reflexiones juridicas
-          publicadas a lo largo de los anos.
-        </p>
+        {% if perfil.bio_footer %}
+        <p class="small">{{ perfil.bio_footer }}</p>
+        {% endif %}
+        {% if perfil.bio_footer_2 %}
+        <p class="small">{{ perfil.bio_footer_2 }}</p>
+        {% endif %}
+        {% endif %}
       </div>
 
       <!-- COLUMNAS / NOTICIAS ANTIGUAS -->
@@ -745,33 +745,16 @@ footer h5, footer h6{
         </h6>
 
         <ul class="list-unstyled small">
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-light opacity-75">
-              &#9656; El decisionismo politico y sus limites constitucionales
+          {% for art in articulos_footer %}
+          <li class="{% if not forloop.last %}mb-2{% endif %}">
+            <a href="{{ art.get_absolute_url }}" class="text-decoration-none text-light opacity-75">
+              &#9656; {{ art.titulo }}
             </a>
-            <div class="opacity-50">Julio 2024</div>
+            <div class="opacity-50">{{ art.fecha_publicacion|date:"F Y" }}</div>
           </li>
-
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-light opacity-75">
-              &#9656; Democracia, poder y crisis de legitimidad
-            </a>
-            <div class="opacity-50">Marzo 2024</div>
-          </li>
-
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-light opacity-75">
-              &#9656; Justicia constitucional en tiempos de polarizacion
-            </a>
-            <div class="opacity-50">Octubre 2023</div>
-          </li>
-
-          <li>
-            <a href="#" class="text-decoration-none text-light opacity-75">
-              &#9656; El juez como ultimo garante institucional
-            </a>
-            <div class="opacity-50">Febrero 2023</div>
-          </li>
+          {% empty %}
+          <li class="text-light opacity-50">Sin articulos publicados</li>
+          {% endfor %}
         </ul>
       </div>
 
@@ -804,7 +787,7 @@ footer h5, footer h6{
     <hr class="my-4 border-secondary">
 
     <div class="text-center small opacity-75">
-      &copy; {% now "Y" %} Camilo Soler Rueda &middot; Todos los derechos reservados<br>
+      &copy; {% now "Y" %} Camilo Andres Soler Rueda &middot; Todos los derechos reservados<br>
       Opinion juridica y analisis politico independiente
     </div>
   </div>

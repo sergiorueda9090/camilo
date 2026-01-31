@@ -13,6 +13,10 @@ class PerfilAutorAdmin(admin.ModelAdmin):
         ('Imagen', {
             'fields': ('foto',)
         }),
+        ('Footer', {
+            'fields': ('bio_footer', 'bio_footer_2'),
+            'description': 'Textos que aparecen en la seccion "Sobre el autor" del footer'
+        }),
     )
 
     def mostrar_foto(self, obj):

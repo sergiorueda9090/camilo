@@ -28,6 +28,16 @@ class PerfilAutor(models.Model):
         null=True
     )
 
+    # Campos para el footer
+    bio_footer = models.TextField(
+        blank=True,
+        help_text="Descripcion breve para el footer (primer parrafo)"
+    )
+    bio_footer_2 = models.TextField(
+        blank=True,
+        help_text="Descripcion adicional para el footer (segundo parrafo)"
+    )
+
     class Meta:
         verbose_name = 'Perfil del Autor'
         verbose_name_plural = 'Perfil del Autor'

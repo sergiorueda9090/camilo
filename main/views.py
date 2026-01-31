@@ -17,6 +17,7 @@ def home(request):
         'perfil': PerfilAutor.get_perfil(),
         'capsulas': CapsulaJuridica.get_activas(),
         'redes_sociales': RedSocial.get_activas(),
+        'articulos_footer': Articulo.get_publicados()[:4],
         'articulo_destacado': articulo_destacado,
         'articulos_archivo': articulos_archivo,
     }
@@ -56,6 +57,7 @@ def articulo_detalle(request, slug):
         'perfil': PerfilAutor.get_perfil(),
         'capsulas': CapsulaJuridica.get_activas(),
         'redes_sociales': RedSocial.get_activas(),
+        'articulos_footer': Articulo.get_publicados()[:4],
         'articulo': articulo,
         'relacionados': relacionados,
         'articulo_anterior': articulo_anterior,

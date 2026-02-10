@@ -151,5 +151,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'height': 400,
         'width': '100%',
+        'entities': False,
+        'entities_latin': False,
+        'entities_greek': False,
     },
 }

@@ -659,8 +659,7 @@ footer h5, footer h6{
 <div class="editorial-ticker">
   <div class="ticker-track">
     <span>
-      Estado de Derecho &bull; Constitucionalismo &bull; Analisis Politico &bull; Opinion Juridica &bull;
-      Democracia & Poder &bull; Separacion de Poderes &bull; Control Constitucional
+      {% for item in ticker_items %}{{ item.texto }}{% if not forloop.last %} &bull; {% endif %}{% endfor %}
     </span>
   </div>
 </div>
@@ -676,25 +675,27 @@ footer h5, footer h6{
     <div class="row justify-content-center">
       <div class="col-lg-8 text-center">
 
+        {% if suscripcion %}
         <span class="subscribe-eyebrow">
-          Circulo Editorial Privado
+          {{ suscripcion.eyebrow }}
         </span>
 
         <h3 class="subscribe-title">
-          Boletin de Analisis Juridico y Politico
+          {{ suscripcion.titulo }}
         </h3>
 
         <p class="subscribe-description">
-          Reflexiones periodicas sobre constitucionalismo, poder publico
-          y coyuntura politica, dirigidas exclusivamente a profesionales,
-          academicos y tomadores de decision.
+          {{ suscripcion.descripcion }}
         </p>
+        {% endif %}
 
         <div class="subscribe-form mt-4">
-          <form class="row g-2 justify-content-center" id="subscribeForm">
+          <form class="row g-2 justify-content-center" id="subscribeForm" action="{% url 'suscribirse' %}" method="post">
+            {% csrf_token %}
             <div class="col-md-7">
               <input
                 type="email"
+                name="email"
                 class="form-control form-control-lg rounded-0"
                 placeholder="Correo electronico profesional"
                 required
@@ -706,10 +707,15 @@ footer h5, footer h6{
               </button>
             </div>
           </form>
+          <div id="subscribeMsg" class="mt-3" style="display:none;">
+            <p class="subscribe-note" id="subscribeMsgText"></p>
+          </div>
 
+          {% if suscripcion.nota %}
           <p class="subscribe-note mt-3">
-            Comunicacion estrictamente editorial. Sin publicidad ni contenido promocional.
+            {{ suscripcion.nota }}
           </p>
+          {% endif %}
         </div>
 
       </div>
@@ -801,7 +807,9 @@ footer h5, footer h6{
 document.getElementById('subscribeForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = this.querySelector('.btn-subscribe');
-  const input = this.querySelector('input[type="email"]');
+  const input = this.querySelector('input[name="email"]');
+  const msgDiv = document.getElementById('subscribeMsg');
+  const msgText = document.getElementById('subscribeMsgText');
 
   if(!input.checkValidity()) {
     input.classList.add('is-invalid');
@@ -811,12 +819,26 @@ document.getElementById('subscribeForm')?.addEventListener('submit', function(e)
   btn.textContent = 'Procesando...';
   btn.disabled = true;
 
-  setTimeout(() => {
-    btn.textContent = '&#10003; Suscrito!';
+  const formData = new FormData(this);
+  fetch(this.action, {
+    method: 'POST',
+    body: formData,
+  })
+  .then(r => r.json())
+  .then(data => {
+    msgText.textContent = data.mensaje;
+    msgDiv.style.display = 'block';
+    btn.textContent = '\u2713 Enviado';
     btn.style.background = 'var(--gold)';
     btn.style.color = 'var(--blue)';
     input.value = '';
-  }, 1500);
+  })
+  .catch(() => {
+    msgText.textContent = 'Error al procesar la solicitud.';
+    msgDiv.style.display = 'block';
+    btn.textContent = 'Solicitar acceso';
+    btn.disabled = false;
+  });
 });
 </script>
 

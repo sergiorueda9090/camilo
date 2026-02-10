@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import PerfilAutor, CapsulaJuridica, Categoria, Articulo, RedSocial
+from .models import PerfilAutor, CapsulaJuridica, Categoria, Articulo, SeccionSuscripcion, TickerItem, RedSocial, Suscriptor, Comentario
 
 
 @admin.register(PerfilAutor)
@@ -105,6 +105,47 @@ class ArticuloAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+@admin.register(SeccionSuscripcion)
+class SeccionSuscripcionAdmin(admin.ModelAdmin):
+    list_display = ['titulo', 'eyebrow']
+
+    def has_add_permission(self, request):
+        return not SeccionSuscripcion.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(TickerItem)
+class TickerItemAdmin(admin.ModelAdmin):
+    list_display = ['texto', 'orden', 'activo']
+    list_editable = ['orden', 'activo']
+    list_filter = ['activo']
+    search_fields = ['texto']
+
+
+@admin.register(Suscriptor)
+class SuscriptorAdmin(admin.ModelAdmin):
+    list_display = ['email', 'activo', 'fecha_registro']
+    list_editable = ['activo']
+    list_filter = ['activo']
+    search_fields = ['email']
+
+
+@admin.register(Comentario)
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ['articulo', 'suscriptor', 'texto_corto', 'fecha_creacion']
+    list_filter = ['articulo']
+    readonly_fields = ['fecha_creacion']
+    search_fields = ['texto', 'suscriptor__email']
+
+    def texto_corto(self, obj):
+        if len(obj.texto) > 80:
+            return obj.texto[:80] + '...'
+        return obj.texto
+    texto_corto.short_description = 'Texto'
 
 
 @admin.register(RedSocial)

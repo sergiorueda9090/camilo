@@ -257,6 +257,115 @@ class Articulo(models.Model):
         return destacado
 
 
+class SeccionSuscripcion(models.Model):
+    """Configuracion de la seccion de suscripcion (singleton)"""
+    eyebrow = models.CharField(
+        max_length=100,
+        help_text="Texto superior pequeno, ej: Circulo Editorial Privado"
+    )
+    titulo = models.CharField(
+        max_length=200,
+        help_text="Titulo principal, ej: Boletin de Analisis Juridico y Politico"
+    )
+    descripcion = models.TextField(
+        help_text="Texto descriptivo debajo del titulo"
+    )
+    nota = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Nota al pie del formulario"
+    )
+
+    class Meta:
+        verbose_name = 'Seccion de Suscripcion'
+        verbose_name_plural = 'Seccion de Suscripcion'
+
+    def __str__(self):
+        return self.titulo
+
+    def save(self, *args, **kwargs):
+        if not self.pk and SeccionSuscripcion.objects.exists():
+            raise ValidationError('Solo puede existir una seccion de suscripcion')
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def get_seccion(cls):
+        return cls.objects.first()
+
+
+class TickerItem(models.Model):
+    """Elementos del ticker editorial superior"""
+    texto = models.CharField(
+        max_length=100,
+        help_text="Ej: Estado de Derecho, Constitucionalismo"
+    )
+    orden = models.PositiveIntegerField(
+        default=0,
+        help_text="Menor numero aparece primero"
+    )
+    activo = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'Ticker'
+        verbose_name_plural = 'Tickers'
+        ordering = ['orden', 'pk']
+
+    def __str__(self):
+        return self.texto
+
+    @classmethod
+    def get_activos(cls):
+        """Obtiene los elementos activos del ticker"""
+        return cls.objects.filter(activo=True)
+
+
+class Suscriptor(models.Model):
+    """Suscriptores del sitio"""
+    email = models.EmailField(unique=True)
+    activo = models.BooleanField(
+        default=False,
+        help_text="Activar para permitir comentar"
+    )
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Suscriptor'
+        verbose_name_plural = 'Suscriptores'
+        ordering = ['-fecha_registro']
+
+    def __str__(self):
+        return self.email
+
+    @classmethod
+    def get_by_email(cls, email):
+        """Busca un suscriptor activo por email"""
+        return cls.objects.filter(email=email, activo=True).first()
+
+
+class Comentario(models.Model):
+    """Comentarios de suscriptores en articulos"""
+    articulo = models.ForeignKey(
+        Articulo,
+        on_delete=models.CASCADE,
+        related_name='comentarios'
+    )
+    suscriptor = models.ForeignKey(
+        Suscriptor,
+        on_delete=models.CASCADE,
+        related_name='comentarios'
+    )
+    texto = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Comentario'
+        verbose_name_plural = 'Comentarios'
+        ordering = ['-fecha_creacion']
+
+    def __str__(self):
+        return f'{self.suscriptor.email} en {self.articulo.titulo[:30]}'
+
+
 class RedSocial(models.Model):
     """Redes sociales del autor para el footer"""
 

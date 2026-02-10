@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load text_filters %}
 
 {% block title %}Dr. Camilo Soler Rueda | Criterio Legal y Politico{% endblock %}
 
@@ -29,7 +30,7 @@
       {% if articulo_destacado.subtitulo %}
       <p class="lead">{{ articulo_destacado.subtitulo }}</p>
       {% endif %}
-      <p>{{ articulo_destacado.contenido|striptags|truncatewords:50 }}</p>
+      <p>{{ articulo_destacado.contenido|striptags|decode_entities|truncatewords:50 }}</p>
       <a href="{% url 'articulo_detalle' articulo_destacado.slug %}" class="btn-editorial mt-3">Leer columna completa</a>
       {% else %}
       <p class="text-muted">No hay articulos publicados.</p>
@@ -95,7 +96,7 @@
               {% if articulo.subtitulo %}
               {{ articulo.subtitulo|truncatewords:15 }}
               {% else %}
-              {{ articulo.contenido|striptags|truncatewords:15 }}
+              {{ articulo.contenido|striptags|decode_entities|truncatewords:15 }}
               {% endif %}
             </p>
             <a href="{% url 'articulo_detalle' articulo.slug %}" class="btn-editorial btn-sm mt-2">Leer</a>
